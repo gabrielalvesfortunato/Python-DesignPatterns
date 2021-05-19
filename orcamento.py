@@ -17,10 +17,6 @@ class Item:
     def valor(self) -> float:
         return self.__valor
 
-    @valor.setter
-    def valor(self, novo_valor: float) -> None:
-        self.__valor = novo_valor
-
 
 class Orcamento:
     def __init__(self) -> None:
@@ -43,5 +39,5 @@ class Orcamento:
     def itens(self) -> List:
         return self.__itens    
 
-    def adiciona_item(self, item: Item) -> None:
+    def adicionar_item(self, item: Item) -> None:
         self.itens.append(item)
