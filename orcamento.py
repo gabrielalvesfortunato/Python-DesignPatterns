@@ -92,7 +92,9 @@ class StateOrcamentoEmAnalise(TemplateStateDeUmOrcamento):
         orcamento.estado_atual = StateOrcamentoReprovado()
 
     def finaliza_orcamento(self, orcamento: Orcamento) -> Any:
-        raise Exception("Orçamentos em aprovação não podem ser finalizados.")
+        raise Exception('''
+            Orçamentos em aprovação não podem ser finalizados.
+        ''')
 
 
 class StateOrcamentoAprovado(TemplateStateDeUmOrcamento):
@@ -118,7 +120,9 @@ class StateOrcamentoReprovado(TemplateStateDeUmOrcamento):
         raise Exception("Orçamentos reprovados não podem ser aprovados.")
 
     def reprova_orcamento(self, orcamento: Orcamento) -> Any:
-        raise Exception("Orcamento reprovado nao pode ser reprovado novamente.")
+        raise Exception('''
+            Orcamentos reprovados não podem ser reprovados novamente.
+        ''')
 
     def finaliza_orcamento(self, orcamento: Orcamento) -> Any:
         orcamento.estado_atual = StateOrcamentoFinalizado()
@@ -130,13 +134,17 @@ class StateOrcamentoFinalizado(TemplateStateDeUmOrcamento):
         orcamento.adiciona_desconto_extra(orcamento.valor * 0)
 
     def aprova_orcamento(self, orcamento: Orcamento) -> Any:
-        raise Exception("Orçamentos finalizados não podem ser aprovados novamente")
+        raise Exception('''
+            Orçamentos finalizados não podem ser aprovados.
+        ''')
 
     def reprova_orcamento(self, orcamento: Orcamento) -> Any:
-        raise Exception("Orçamentos finalizados não podem ser reprovados")
+        raise Exception("Orçamentos finalizados não podem ser reprovados.")
 
     def finaliza_orcamento(self, orcamento: Orcamento) -> Any:
-        raise Exception("Orçamentos finalizados não podem ser finalizados novamente.")
+        raise Exception('''
+            Orçamentos finalizados não podem ser finalizados novamente.
+        ''')
 
 
 
