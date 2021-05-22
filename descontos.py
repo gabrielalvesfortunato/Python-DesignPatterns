@@ -2,7 +2,7 @@ from typing import Union
 
 from orcamento import Orcamento
 
-
+### PATTERN CHAIN OF RESPONSABILITY - UMA CLASSE EVOCA OUTRA SE NAO FOR USADA ###
 class SemDesconto:
 
     def calcula(self, orcamento: Orcamento) -> float:

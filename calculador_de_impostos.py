@@ -1,14 +1,10 @@
-from typing import Union
-
 from orcamento import Orcamento
-from impostos import ICMS, ISS
+from impostos import *
 
-Class = Union[ICMS, ISS]
-
-
+## Pattern Strategy ##
 class CalculadoraImpostos:
 
     @staticmethod
-    def realiza_calculo(orcamento: Orcamento, imposto: Class) -> float:
+    def realiza_calculo(orcamento: Orcamento, imposto) -> float:
         imposto_calculado: float = imposto.calcula(orcamento)
-        return imposto_calculado
+        return round(imposto_calculado)
