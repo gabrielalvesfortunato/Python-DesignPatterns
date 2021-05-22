@@ -42,13 +42,13 @@ class Orcamento:
     def itens(self) -> List:
         return self.__itens    
 
-    def aprova_orcamento(self):
+    def aprova_orcamento(self) -> Any:
         self.estado_atual.aprova_orcamento(orcamento)
 
-    def reprova_orcamento(self):
+    def reprova_orcamento(self) -> Any:
         self.estado_atual.reprova_orcamento(orcamento)
 
-    def finaliza_orcamento(self):
+    def finaliza_orcamento(self) -> Any:
         self.estado_atual.finaliza_orcamento(orcamento)
 
     def adicionar_item(self, item: Item) -> None:
