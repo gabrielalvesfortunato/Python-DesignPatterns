@@ -63,6 +63,9 @@ class Orcamento:
 
 ## APLICANDO O PATTERN ººTemplate Methodºº PARA OS ESTADOS DE ORCAMENTO ##
 class TemplateStateDeUmOrcamento(metaclass=ABCMeta):
+    def __init__(self) -> None:
+        self.desconto_aplicado = False
+
     @abstractmethod
     def aplica_desconto_extra(self, orcamento: Orcamento) -> Any:
         ...
@@ -83,7 +86,11 @@ class TemplateStateDeUmOrcamento(metaclass=ABCMeta):
 ## APLICANDO O PATTERN ººSTATEºº PARA OS ESTADOS DE ORCAMENTO ##
 class StateOrcamentoEmAnalise(TemplateStateDeUmOrcamento):
     def aplica_desconto_extra(self, orcamento: Orcamento) -> Any:
-        orcamento.adiciona_desconto_extra(orcamento.valor * 0.02)
+        if not self.desconto_aplicado:
+            orcamento.adiciona_desconto_extra(orcamento.valor * 0.02)
+            self.desconto_aplicado = True
+        else:
+            raise Exception("Desconto já aplicado")
 
     def aprova_orcamento(self, orcamento: Orcamento) -> Any:
         orcamento.estado_atual = StateOrcamentoAprovado()
@@ -99,7 +106,11 @@ class StateOrcamentoEmAnalise(TemplateStateDeUmOrcamento):
 
 class StateOrcamentoAprovado(TemplateStateDeUmOrcamento):
     def aplica_desconto_extra(self, orcamento: Orcamento) -> Any:
-        orcamento.adiciona_desconto_extra(orcamento.valor * 0.05)
+        if not self.desconto_aplicado:
+            orcamento.adiciona_desconto_extra(orcamento.valor * 0.05)
+            self.desconto_aplicado = True
+        else:
+            raise Exception("Desconto já aplicado.")
 
     def aprova_orcamento(self, orcamento: Orcamento) -> Any:
         raise Exception("Orçamento já aprovado.")
@@ -114,7 +125,11 @@ class StateOrcamentoAprovado(TemplateStateDeUmOrcamento):
 ## Orçamentos reprovados NÃO recebem descontos ##
 class StateOrcamentoReprovado(TemplateStateDeUmOrcamento):
     def aplica_desconto_extra(self, orcamento: Orcamento) -> Any:
-        orcamento.adiciona_desconto_extra(orcamento.valor * 0)
+        if not self.desconto_aplicado:
+            orcamento.adiciona_desconto_extra(orcamento.valor * 0)
+            self.desconto_aplicado = True
+        else:
+            raise Exception("Desconto já aplicado.")
 
     def aprova_orcamento(self, orcamento: Orcamento) -> Any:
         raise Exception("Orçamentos reprovados não podem ser aprovados.")
@@ -131,7 +146,11 @@ class StateOrcamentoReprovado(TemplateStateDeUmOrcamento):
 ## Orcamentos finalizados NÃO recebem descontos ##
 class StateOrcamentoFinalizado(TemplateStateDeUmOrcamento):
     def aplica_desconto_extra(self, orcamento: Orcamento) -> Any:
-        orcamento.adiciona_desconto_extra(orcamento.valor * 0)
+        if not self.desconto_aplicado:
+            orcamento.adiciona_desconto_extra(orcamento.valor * 0)
+            self.desconto_aplicado = True
+        else:
+            raise Exception("Desconto já aplicado.")
 
     def aprova_orcamento(self, orcamento: Orcamento) -> Any:
         raise Exception('''
