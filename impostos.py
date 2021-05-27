@@ -4,6 +4,7 @@ from orcamento import Orcamento
 
 ### PATTERN TEMPLATE METHOD ###
 class TemplateImposto(metaclass=ABCMeta):
+
     ### PATTERN DECORATE UMA CLASSE É 'DECORADA' COM UMA OUTRA CLASSE/COMPORTAMENTO
     def __init__(self, outro_imposto = None) -> None:
         self.__outro_imposto = outro_imposto
